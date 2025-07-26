@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
       - name: ls root dir
         shell: bash
         run: ls -alh
