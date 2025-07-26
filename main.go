@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-	imagePath := dockerBuildAndSave()
-	scp.ScpFile(imagePath)
-
+	scp.ScpFile(dockerBuildAndSave())
 }
 
 func dockerBuildAndSave() (filepath string) {

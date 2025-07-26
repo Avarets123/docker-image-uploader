@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -93,7 +94,10 @@ func scp(con *ssh.Client, localFile, remoteDir string) {
 
 	fmt.Printf("Start copy file.\n Size: %d\n Remote dir: %s\n", fInfo.Size(), remoteFile)
 
-	fmt.Fprintf(stdinPipe, "C%04o %d %s\n", 0777, fInfo.Size(), filepath.Base(remoteFile))
+	_, err = fmt.Fprintf(stdinPipe, "C%04o %d %s\n", 0777, fInfo.Size(), filepath.Base(remoteFile))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	cb, err := io.Copy(stdinPipe, f)
 	if err != nil {
@@ -102,5 +106,20 @@ func scp(con *ssh.Client, localFile, remoteDir string) {
 
 	fmt.Printf("%d bytes was copied!", cb)
 	fmt.Fprint(stdinPipe, "\x00")
+
+	done := make(chan error, 1)
+	go func() {
+		done <- sess.Wait()
+	}()
+
+	select {
+	case err = <-done:
+		if err != nil {
+			log.Fatal(err)
+		}
+		return
+	case <-time.After(5 * time.Minute):
+		return
+	}
 
 }
