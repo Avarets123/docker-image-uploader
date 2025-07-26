@@ -10,18 +10,21 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+
       - name: ls and pwd root dir
         shell: bash
         run: ls -alh && pwd
-      # - name: ls run file dir
-      #   shell: bash
-      #   run: ls -alh /opt/dimage_uploader/
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
       - name: docker-image-uploader
         uses: Avarets123/docker-image-uploader@master
         with:
           image_name: test
           image_tag: first
-          dockerfile_path: ./test
+          dockerfile_path: ./test/
+          
       - name: ls image dir
         shell: bash
         run: ls -alh /tmp/dimages/
