@@ -118,7 +118,7 @@ func scp(con *ssh.Client, localFile, remoteDir string) {
 			log.Fatal(err)
 		}
 		return
-	case <-time.After(5 * time.Minute):
+	case <-time.After(40 * time.Second):
 		return
 	}
 
