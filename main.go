@@ -67,7 +67,7 @@ func (d *dockerCmd) buildImage() {
 
 func (d *dockerCmd) saveImage(dir string) {
 
-	err := runCmd("mkdir", "-p", dir)
+	err := runCmd("mkdir", "0777", "-p", dir)
 	if err != nil {
 		log.Fatal(err)
 	}
