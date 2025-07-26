@@ -1,0 +1,23 @@
+name: docker-image-uploader
+description: Dockerfile -> image -> copy to server
+author: Osman
+inputs:
+  dockerfile_path:
+    required: false
+    default: ./
+    description: path to dockerfile
+  image_name:
+    required: false
+    description: docker image name
+  image_tag:
+    required: false
+    default: latest
+    description: docker image tag
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: upload-cloud
+  color: gray-dark
+
+  
