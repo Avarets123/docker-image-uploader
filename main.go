@@ -50,8 +50,6 @@ func NewDockerCmd(dockerfilePath, imageName, tagName string) *dockerCmd {
 
 func (d *dockerCmd) buildImage() {
 	args := []string{
-		"-c",
-		"docker",
 		"build",
 		"-t",
 		fmt.Sprintf("%s:%s", d.imageName, d.tagName),
@@ -60,7 +58,7 @@ func (d *dockerCmd) buildImage() {
 
 	fmt.Printf("RUN cmd: docker %s %s %s %s \n", args[0], args[1], args[2], args[3])
 
-	err := runCmd("sh", args...)
+	err := runCmd("/usr/bin/docker", args...)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -83,8 +81,6 @@ func (d *dockerCmd) saveImage(dir string) {
 	fpath := fmt.Sprintf("%s%s_%s.tar", dir, d.imageName, d.tagName)
 
 	args := []string{
-		"-c",
-		"docker",
 		"save",
 		imageWithTag,
 		"-o",
@@ -92,7 +88,7 @@ func (d *dockerCmd) saveImage(dir string) {
 	}
 
 	fmt.Printf("RUN cmd: docker %s %s %s %s \n", args[0], args[1], args[2], args[3])
-	err = runCmd("sh", args...)
+	err = runCmd("/usr/bin/docker", args...)
 	if err != nil {
 		log.Fatal(err)
 	}
