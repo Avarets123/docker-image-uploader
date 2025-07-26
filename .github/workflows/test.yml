@@ -1,0 +1,29 @@
+name: Test action
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test build and save image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@4
+      - name: ls root dir
+        shell: bash
+        run: ls -alh
+      - name: docker-image-uploader
+        uses: Avarets123/docker-image-uploader@master
+        with:
+          image_name: test
+          image_tag: first
+          dockerfile_path: ./
+      - name: ls run file dir
+        shell: bash
+        run: ls -alh /opt/dimage_uploader/
+      - name: ls image dir
+        shell: bash
+        run: ls -alh /tmp/dimages/
+
+      
