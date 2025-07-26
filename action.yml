@@ -13,6 +13,19 @@ inputs:
     required: false
     default: latest
     description: docker image tag
+  private_key:
+    required: true
+    description: ssh privateKey
+  host:
+    required: true
+    description:  remote host
+  port:
+    required: false
+    default: '22'
+    description: ssh host port
+  remote_copy_path:
+    required: true
+    description: remote copy path
 runs:
   using: docker
   image: Dockerfile

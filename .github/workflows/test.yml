@@ -27,9 +27,11 @@ jobs:
           image_name: test
           image_tag: first
           dockerfile_path: ./test/
+          username: ${{ secrets.USERNAME }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          host: ${{ secrets.HOST }}
+          port: 22
+          remote_copy_path: /tmp
 
-      - name: ls image dir
-        shell: bash
-        run: ls -alh /tmp/dimages/
 
       
