@@ -13,9 +13,9 @@ jobs:
       - name: ls and pwd root dir
         shell: bash
         run: ls -alh && pwd
-      - name: ls run file dir
-        shell: bash
-        run: ls -alh /opt/dimage_uploader/
+      # - name: ls run file dir
+      #   shell: bash
+      #   run: ls -alh /opt/dimage_uploader/
       - name: docker-image-uploader
         uses: Avarets123/docker-image-uploader@master
         with:
