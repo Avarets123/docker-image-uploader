@@ -18,13 +18,16 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
       - name: docker-image-uploader
         uses: Avarets123/docker-image-uploader@master
         with:
           image_name: test
           image_tag: first
           dockerfile_path: ./test/
-          
+
       - name: ls image dir
         shell: bash
         run: ls -alh /tmp/dimages/
