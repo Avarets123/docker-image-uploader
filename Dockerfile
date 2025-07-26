@@ -7,13 +7,17 @@ RUN go mod download
 
 COPY . .
 
-RUN mkdir -p /opt/dimage_uploader
 
-RUN CGO_ENABLED=0 GOOS=linux go build  -o /opt/dimage_uploader/main
+RUN CGO_ENABLED=0 GOOS=linux go build  -o ./main
 
 
 # RUN CGO_ENABLED=0 GOOS=linux go build  -o ./main
 
+FROM docker:cli
+
+RUN mkdir -p /opt/dimage_uploader
+
+COPY --from=build  /build/main /opt/dimage_uploader/main
 
 # FROM alpine:3.18
 
@@ -22,7 +26,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build  -o /opt/dimage_uploader/main
 # # COPY --from=build  /build/entrypoint.sh /opt/dimage_uploader/entrypoint.sh
 # # RUN chmod +x /opt/dimage_uploader/entrypoint.sh
 
-# COPY --from=build  /build/main /opt/dimage_uploader/main
 # RUN chmod +x /opt/dimage_uploader/main
 
 

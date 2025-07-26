@@ -58,7 +58,7 @@ func (d *dockerCmd) buildImage() {
 
 	fmt.Printf("RUN cmd: docker %s %s %s %s \n", args[0], args[1], args[2], args[3])
 
-	err := runCmd("/usr/bin/docker", args...)
+	err := runCmd("docker", args...)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -88,7 +88,7 @@ func (d *dockerCmd) saveImage(dir string) {
 	}
 
 	fmt.Printf("RUN cmd: docker %s %s %s %s \n", args[0], args[1], args[2], args[3])
-	err = runCmd("/usr/bin/docker", args...)
+	err = runCmd("docker", args...)
 	if err != nil {
 		log.Fatal(err)
 	}
