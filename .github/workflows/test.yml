@@ -11,21 +11,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: ls and pwd root dir
-        shell: bash
-        run: ls -l && pwd
-
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v2
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
       - name: docker-image-uploader
         uses: Avarets123/docker-image-uploader@master
         with:
-          image_name: test
-          image_tag: first
+          image_name: hello_world
+          image_tag: latest
           dockerfile_path: ./test/
           username: ${{ secrets.USERNAME }}
           private_key: ${{ secrets.PRIVATE_KEY }}
