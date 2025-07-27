@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-
       - name: docker-image-uploader
         uses: Avarets123/docker-image-uploader@master
         with:
