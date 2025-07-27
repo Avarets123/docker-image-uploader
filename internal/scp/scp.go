@@ -86,7 +86,7 @@ func scp(con *ssh.Client, localFile, remoteDir string) {
 
 	remoteFile := filepath.Join(remoteDir, filepath.Base(localFile))
 
-	copyCmd := fmt.Sprintf("scp -t %s", remoteDir)
+	copyCmd := fmt.Sprintf("mkdir -p %s && scp -t %s", remoteDir, remoteDir)
 	err = sess.Start(copyCmd)
 	if err != nil {
 		log.Fatal(err)
@@ -118,7 +118,7 @@ func scp(con *ssh.Client, localFile, remoteDir string) {
 			log.Fatal(err)
 		}
 		return
-	case <-time.After(40 * time.Second):
+	case <-time.After(30 * time.Second):
 		return
 	}
 
